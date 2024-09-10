@@ -41,7 +41,7 @@ jobs:
       - name: Deploy Lambda function code
         run: |
           aws lambda update-function-code \
-            --function-name lambda-autenticacao-tech-challenge \
+            --function-name autenticacao-tech-challenge-lambda \
             --zip-file fileb://lambda_function.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -52,7 +52,7 @@ jobs:
       - name: Update Lambda function VPC configuration
         run: |
           aws lambda update-function-configuration \
-            --function-name lambda-autenticacao-tech-challenge \
+            --function-name autenticacao-tech-challenge-lambda \
             --vpc-config SubnetIds=subnet-0fb3bb4ae4e0b27b6,subnet-09c32234ebea3d3dd,subnet-0b47825759083e26d,subnet-0aa10a3ce65aa31ca,subnet-0b7d7186cd14229dc,subnet-004a5785aa1f8508f,SecurityGroupIds=sg-0b635a557830e706b
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
