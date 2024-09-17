@@ -16,7 +16,6 @@ def lambda_handler(event, context):
         )
         
         cursor = connection.cursor()
-        
         cursor.execute("SELECT version();")
         result = cursor.fetchone()
         print(f"Database version: {result[0]}")
