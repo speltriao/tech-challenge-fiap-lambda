@@ -21,5 +21,3 @@ jobs:
           title: "Auto PR - ${{ github.ref_name }}"
           body: |
             Automatically created pull request for the branch `${{ github.ref_name }}`
-          draft: false
-          branch: ${{ github.ref_name }}-pr # Optional: creates a temporary branch if needed
