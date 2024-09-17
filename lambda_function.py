@@ -1,4 +1,4 @@
-import psycopg2
+import pg8000
 import os
 
 db_host = os.environ['DB_HOST']
@@ -8,7 +8,7 @@ db_password = os.environ['DB_PASSWORD']
 
 def lambda_handler(event, context):
     try:
-        connection = psycopg2.connect(
+        connection = pg8000.connect(
             host=db_host,
             database=db_name,
             user=db_user,
