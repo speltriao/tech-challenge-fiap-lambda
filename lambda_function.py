@@ -4,7 +4,7 @@ import os
 import jwt
 
 def lambda_handler(event, context):
-    token = event['headers'].get('teste')
+    token = event['headers'].get('autenticacao')
     method_arn = event['methodArn']
     
     print(f"Authorization Token: {token}")
