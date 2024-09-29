@@ -20,10 +20,8 @@ def lambda_handler(event, context):
         except Exception as e:
             print(f"Error decoding token: {e}")
             return generate_policy('user', 'Deny', method_arn)
-    elif token == "NAO":
-        return generate_policy('user', 'Deny', method_arn)
     else:
-        raise Exception('Unauthorized!!!!!!!!!!!!')
+        raise Exception('Unauthorized')
 
 def get_cpf_from_jwt_token(token: str) -> str:
     try:
