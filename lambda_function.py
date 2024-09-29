@@ -5,6 +5,7 @@ import jwt
 
 def lambda_handler(event, context):
     token = event['headers'].get('Authorization')
+    token = remove_bearer_string(token)
     method_arn = event['methodArn']
     
     print(f"Authorization Token: {token}")
@@ -32,6 +33,9 @@ def get_cpf_from_jwt_token(token: str) -> str:
         raise Exception("Token has expired")
     except jwt.InvalidTokenError:
         raise Exception("Invalid token")
+
+def remove_bearer_string(token: str) -> str:
+    return token.replace("Bearer ", "")
 
 def is_valid_customer(cpf_from_token: str) -> bool:
     db_host = os.environ['DB_HOST']
