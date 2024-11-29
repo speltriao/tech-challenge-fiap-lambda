@@ -40,24 +40,9 @@ jobs:
 
       - name: Deploy to AWS Lambda
         run: |
-          # Deploy the updated code
           aws lambda update-function-code \
             --function-name autenticacao-tech-challenge-lambda \
             --zip-file fileb://lambda_function.zip
-
-          # Construct the environment variables as a JSON string
-          ENV_VARS=$(jq -n \
-            --arg DB_HOST "${{ secrets.DB_HOST }}" \
-            --arg DB_NAME "${{ secrets.DB_NAME }}" \
-            --arg DB_USER "${{ secrets.DB_USER }}" \
-            --arg DB_PASSWORD "${{ secrets.DB_PASSWORD }}" \
-            --arg SECRET_KEY "${{ secrets.SECRET_KEY }}" \
-            '{Variables: {DB_HOST: $DB_HOST, DB_NAME: $DB_NAME, DB_USER: $DB_USER, DB_PASSWORD: $DB_PASSWORD, SECRET_KEY: $SECRET_KEY}}')
-
-          # Update the Lambda configuration with the environment variables
-          aws lambda update-function-configuration \
-            --function-name autenticacao-tech-challenge-lambda \
-            --environment "$ENV_VARS"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
